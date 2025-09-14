@@ -7,10 +7,16 @@ Fixed::Fixed(){
     this->fix_p_v = 0;
 }
 
-Fixed::Fixed(Fixed &a){
+Fixed::Fixed(const Fixed &a){
     std::cout<< "Copy constructor called" << std::endl;
-    this->fix_p_v = a.getRawBits();
+    *this = a;
 }
+
+Fixed::Fixed(const int a) {
+    std::cout << "Int constructor called" << std::endl;
+    this->fix_p_v = a << this->fractional;
+}
+
 
 Fixed& Fixed::operator=(const Fixed& other){
     std::cout<< "Copy assignment operator called" << std::endl;
@@ -22,8 +28,13 @@ Fixed& Fixed::operator=(const Fixed& other){
 }
 
 
+Fixed::Fixed(const float a) {
+    std::cout << "Float constructor called" << std::endl;
+    this->fix_p_v = ceil(a * (1 << this->fractional));
+}
+
+
 int Fixed::getRawBits( void ) const{
-    std::cout<< "getRawBits member function called" << std::endl;
     return (this->fix_p_v);
 }
 
@@ -41,6 +52,9 @@ float Fixed::toFloat(void) const {
     return static_cast<float>(this->fix_p_v) / (1 << this->fractional);
 }
 
+int Fixed::toInt(void) const {
+    return this->fix_p_v >> this->fractional;
+}
 
 std::ostream& operator<<(std::ostream& os, const Fixed& fixed_point_object) {
     os << fixed_point_object.toFloat();

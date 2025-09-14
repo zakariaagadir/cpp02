@@ -7,7 +7,7 @@ Fixed::Fixed(){
     this->fix_p_v = 0;
 }
 
-Fixed::Fixed(Fixed &a){
+Fixed::Fixed(const Fixed &a){
     std::cout<< "Copy constructor called" << std::endl;
     *this = a;
 }
