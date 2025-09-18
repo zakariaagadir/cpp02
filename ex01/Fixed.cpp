@@ -30,7 +30,7 @@ Fixed& Fixed::operator=(const Fixed& other){
 
 Fixed::Fixed(const float a) {
     std::cout << "Float constructor called" << std::endl;
-    this->fix_p_v = ceil(a * (1 << this->fractional));
+    this->fix_p_v = roundf(a * (1 << this->fractional));
 }
 
 
