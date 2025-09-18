@@ -32,6 +32,15 @@ void Fixed::setRawBits( int const raw ){
     this->fix_p_v = raw;
 }
 
+Fixed& Fixed::operator=(const Fixed& other){
+    std::cout<< "Copy assignment operator called" << std::endl;
+    if (this != &other)
+    {
+        this->fix_p_v = other.getRawBits();
+    }
+    return (*this);
+}
+
 Fixed::~Fixed(){
     std::cout<< "Destructor called" << std::endl;
 }
